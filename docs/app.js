@@ -106,6 +106,7 @@
     stats: getLocal('spellstr.stats', { correct: 0, attempts: 0 }),
     current: null,
     lastPrompt: '',
+    session: { correct: 0, attempts: 0 },
     mastered: new Set(), // unique words correctly spelled this session
     reviewQueue: [], // words to revisit after misses/skips
     sessionGoal: 20,
@@ -117,7 +118,7 @@
   function saveStats(){ setLocal('spellstr.stats', state.stats); }
 
   function updateStatsUI(){
-    const {correct, attempts} = state.stats;
+    const {correct, attempts} = state.session;
     $('#stats').textContent = `${correct} correct out of ${attempts} attempted`;
   }
 
@@ -191,6 +192,10 @@
   function start(){
     $('#landing').classList.add('hidden');
     $('#practice').classList.remove('hidden');
+    // Reset session counters at the start of each session
+    state.session.correct = 0;
+    state.session.attempts = 0;
+    updateStatsUI();
     nextWord();
   }
 
@@ -239,6 +244,8 @@
       // Word completed correctly within attempts
       state.stats.attempts += 1;
       state.stats.correct += 1;
+      state.session.attempts += 1;
+      state.session.correct += 1;
       // Mark as mastered (unique per session), and remove from review queue if present
       state.mastered.add(correct);
       state.reviewQueue = state.reviewQueue.filter(x => x.w.toLowerCase() !== correct);
@@ -262,6 +269,7 @@
         state.mode = 'confirm';
         // Count this word as attempted (incorrect). Do not increment correct.
         state.stats.attempts += 1;
+        state.session.attempts += 1;
         queueMissed(state.current);
         saveStats();
         updateStatsUI();
@@ -282,6 +290,7 @@
       // Only count attempt if we haven't already counted this word (avoid double-count in confirm mode)
       if(state.mode !== 'confirm'){
         state.stats.attempts += 1; 
+        state.session.attempts += 1;
         queueMissed(state.current);
         saveStats(); updateStatsUI();
       }
@@ -289,6 +298,8 @@
     });
     $('#btn-restart').addEventListener('click', () => {
       // Reset session-only data and return to landing
+      state.session.correct = 0;
+      state.session.attempts = 0;
       state.mastered.clear();
       state.reviewQueue = [];
       state.tries = 0;
@@ -299,6 +310,7 @@
       $('#practice').classList.add('hidden');
       $('#landing').classList.remove('hidden');
       $('#answer').value = '';
+      updateStatsUI();
     });
     $('#answer-form').addEventListener('submit', (e) => {
       e.preventDefault();
