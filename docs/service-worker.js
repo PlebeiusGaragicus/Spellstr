@@ -1,11 +1,12 @@
 /* Spellstr Service Worker */
-const CACHE_NAME = 'spellstr-v1';
+const CACHE_NAME = 'spellstr-v2';
 const ASSETS = [
   './',
   './index.html',
   './styles.css',
   './app.js',
   './manifest.webmanifest',
+  './words.json',
   './icons/icon-192.svg',
   './icons/icon-512.svg',
 ];
