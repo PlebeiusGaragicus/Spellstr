@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#2563eb" />
+  <title>Spellstr — Spelling Practice</title>
+  <meta name="description" content="Practice spelling words with speech and sentences. PWA, works offline." />
+
+  <link rel="manifest" href="./manifest.webmanifest">
+  <link rel="icon" href="./icons/icon-192.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="./icons/icon-192.svg">
+  <link rel="preload" href="./styles.css" as="style">
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <noscript>
+    <div class="notice">This app needs JavaScript enabled.</div>
+  </noscript>
+
+  <header class="app-header">
+    <h1>Spellstr</h1>
+    <button id="btn-settings" class="icon-btn" aria-label="Settings" title="Settings" hidden>⚙️</button>
+  </header>
+
+  <main class="container">
+    <section id="landing" class="card">
+      <h2>Practice Spelling</h2>
+      <p>Tap start, listen carefully, then type the word you hear.</p>
+      <button id="btn-start" class="primary">Start</button>
+    </section>
+
+    <section id="practice" class="card hidden" aria-live="polite">
+      <div class="prompt">
+        <div class="prompt-row">
+          <button id="btn-hear" class="secondary" aria-label="Hear it again">🔊 Hear it again</button>
+        </div>
+        <p class="hint" id="tts-hint" role="status"></p>
+      </div>
+
+      <form id="answer-form" autocomplete="off">
+        <label for="answer" class="visually-hidden">Type the word</label>
+        <input id="answer" name="answer" inputmode="latin" autocapitalize="off" autocomplete="off" autocorrect="off" spellcheck="false" placeholder="Type the word" required />
+        <div class="actions">
+          <button type="submit" class="primary">Submit</button>
+          <button type="button" id="btn-skip" class="tertiary">Skip</button>
+        </div>
+      </form>
+
+      <div id="feedback" class="feedback" aria-live="polite"></div>
+    </section>
+  </main>
+
+  <footer class="footer" id="stats" aria-live="polite">
+    0 correct out of 0 attempted
+  </footer>
+
+  <script defer src="./app.js"></script>
+</body>
+</html>

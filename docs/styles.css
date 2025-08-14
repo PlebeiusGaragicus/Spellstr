@@ -1,0 +1,46 @@
+/* Spellstr Styles */
+:root{
+  --bg:#0b1220;
+  --card:#111a2b;
+  --accent:#2563eb;
+  --accent-2:#1d4ed8;
+  --text:#e5e7eb;
+  --muted:#9ca3af;
+  --ok:#16a34a;
+  --warn:#ef4444;
+}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Apple Color Emoji", "Segoe UI Emoji";
+  color:var(--text);
+  background:linear-gradient(180deg,#0b1220,#0b1220 40%,#0e172a);
+  display:flex; flex-direction:column;
+}
+.app-header{
+  display:flex; align-items:center; justify-content:space-between;
+  padding:16px 20px; border-bottom:1px solid #1f2a44;
+}
+.app-header h1{margin:0; font-size:20px; letter-spacing:.5px}
+.icon-btn{background:transparent; border:1px solid #2a3b63; color:var(--text); padding:6px 10px; border-radius:8px; cursor:pointer}
+.container{max-width:780px; margin:24px auto; padding:0 16px; width:100%;}
+.card{background:var(--card); border:1px solid #1b2947; border-radius:16px; padding:20px; box-shadow:0 10px 30px rgba(0,0,0,.35)}
+.hidden{display:none}
+.primary{background:var(--accent); border:1px solid var(--accent-2); color:white; padding:12px 18px; border-radius:12px; font-weight:600; cursor:pointer}
+.primary:hover{background:var(--accent-2)}
+.secondary{background:transparent; border:1px solid #2a3b63; color:var(--text); padding:10px 14px; border-radius:10px; cursor:pointer}
+.secondary:hover{border-color:#385089}
+.tertiary{background:transparent; border:0; color:var(--muted); padding:8px 10px; cursor:pointer}
+.prompt{display:flex; flex-direction:column; gap:8px; margin-bottom:12px}
+.prompt-row{display:flex; gap:10px; align-items:center}
+.hint{color:var(--muted); font-size:14px; min-height:20px}
+#answer{width:100%; padding:14px 16px; border-radius:12px; border:1px solid #2a3b63; background:#0b1326; color:var(--text); font-size:18px}
+#answer:focus{outline:2px solid #355fb3}
+.actions{margin-top:12px; display:flex; gap:10px}
+.feedback{margin-top:14px; min-height:28px}
+.feedback.ok{color:var(--ok)}
+.feedback.err{color:var(--warn)}
+.footer{margin-top:auto; text-align:center; padding:14px; color:var(--muted); border-top:1px solid #1f2a44}
+.notice{padding:10px; text-align:center; background:#fef3c7; color:#7c2d12}
+.visually-hidden{position:absolute; left:-9999px; width:1px; height:1px; overflow:hidden}
